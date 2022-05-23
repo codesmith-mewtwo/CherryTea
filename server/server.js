@@ -1,13 +1,31 @@
-import express from 'express';
-import path from 'path';
-import authController from './controllers/authController';
-
-const app = express()
-
+// Server setup
+const express = require('express');
+const app = express();
+const path = require('path');
 const PORT = 3000
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+
+// Required routers
+const authRouter = require('./routers/authRouter')
+
+
+// Route handlers
+app.use('/auth', authRouter);
+
+
+// Check if running in production, use build if so
+if (process.env.NODE_ENV === "production"){
+
+  // statically serve everything in the build folder on the route '/build'
+  app.use('/build', express.static(path.join(__dirname, '../dist')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../client/index.html'));
+  });
+}
+
 
 //Unknown Route Handler
 app.get('/*', (req, res) => {
