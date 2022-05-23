@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "nodemon ./server/server.js & webpack serve --open",
+    "dev": "NODE_ENV=development nodemon ./server/server.js & NODE_ENV=development webpack serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
