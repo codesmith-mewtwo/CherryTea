@@ -8,3 +8,5 @@ const router = express.Router();
 router.post('/signup', authController.signUp, (req, res) => {
   return res.sendStatus(200);
 });
+
+module.exports = router;
