@@ -16,4 +16,4 @@ authController.signUp = ((req, res, next)=>{
   });
 })
 
-export default authController;
+module.exports = authController;
