@@ -7,4 +7,8 @@ node_modules
 # Environment
 .env
 
+# package lock
 package-lock.json
+
+# webpack
+dist

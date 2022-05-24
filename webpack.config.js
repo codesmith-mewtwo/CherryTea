@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: process.env.NODE_ENV,
   entry: './client/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -18,8 +19,8 @@ module.exports = {
     compress: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
-      '/api/*': "http://localhost:3000"
-    }
+      '/api/*': 'http://localhost:3000',
+    },
   },
   module: {
     rules: [
