@@ -1,5 +1,5 @@
 CREATE TABLE public.users (
-	"_id" uuid UNIQUE NOT NULL,
+	"_id" uuid UNIQUE NOT NULL DEFAULT uuid_generate_v4 (),
 	"username" varchar NOT NULL,
 	"password" varchar NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("_id")
@@ -8,7 +8,7 @@ CREATE TABLE public.users (
 );
 
 CREATE TABLE public.users_charities (
-	"_id" uuid UNIQUE NOT NULL,
+	"_id" uuid UNIQUE NOT NULL DEFAULT uuid_generate_v4 (),
 	"user_id" uuid NOT NULL,
 	"charity_id" uuid NOT NULL,
 	CONSTRAINT "users&charities_pk" PRIMARY KEY ("_id")
@@ -17,7 +17,7 @@ CREATE TABLE public.users_charities (
 );
 
 CREATE TABLE public.charities (
-	"_id" uuid UNIQUE NOT NULL,
+	"_id" uuid UNIQUE NOT NULL DEFAULT uuid_generate_v4 (),
 	"purpose" varchar,
 	"financialRating" bigint,
   "overallRating" bigint,
