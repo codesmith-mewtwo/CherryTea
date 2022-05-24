@@ -1,5 +1,5 @@
 CREATE TABLE public.users (
-	"_id" serial UNIQUE NOT NULL,
+	"_id" uuid UNIQUE NOT NULL,
 	"username" varchar NOT NULL,
 	"password" varchar NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("_id")
@@ -8,16 +8,16 @@ CREATE TABLE public.users (
 );
 
 CREATE TABLE public.users_charities (
-	"_id" serial UNIQUE NOT NULL,
-	"user_id" bigint NOT NULL,
-	"charity_id" bigint NOT NULL,
+	"_id" uuid UNIQUE NOT NULL,
+	"user_id" uuid NOT NULL,
+	"charity_id" uuid NOT NULL,
 	CONSTRAINT "users&charities_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
 );
 
 CREATE TABLE public.charities (
-	"_id" serial UNIQUE,
+	"_id" uuid UNIQUE NOT NULL,
 	"purpose" varchar,
 	"financialRating" bigint,
   "overallRating" bigint,
@@ -29,11 +29,11 @@ CREATE TABLE public.charities (
   "financialTrend" boolean,
   "overallTrend" boolean,
   "accountabilityTrend" boolean,
-  "EIN" varchar NOT NULL
+  "EIN" varchar NOT NULL,
   CONSTRAINT "charities_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
 );
 
 ALTER TABLE public.users_charities ADD CONSTRAINT "users_charities_fk0" FOREIGN KEY ("user_id") REFERENCES  public.users("_id");
-ALTER TABLE public.users_charities ADD CONSTRAINT "users_charities_fk0" FOREIGN KEY ("charity_id") REFERENCES  public.charities("_id");
+ALTER TABLE public.users_charities ADD CONSTRAINT "users_charities_fk1" FOREIGN KEY ("charity_id") REFERENCES  public.charities("_id");
