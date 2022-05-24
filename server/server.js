@@ -1,11 +1,16 @@
 // Server setup
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const path = require('path');
-const PORT = 3000;
+const PORT = 3000
+const cookieParser = require('cookie-parser');
+
+
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 // Required routers
 const authRouter = require('./routers/authRouter');
@@ -14,8 +19,9 @@ const authRouter = require('./routers/authRouter');
 app.use('/auth', authRouter);
 
 // Check if running in production, use build if so
-if (process.env.NODE_ENV === 'production') {
-  // statically serve everything in the build folder on the route '/build'
+if (process.env.NODE_ENV === "production"){
+
+  // statically serve everything in the build folder on the route '/dist'
   app.use('/dist', express.static(path.join(__dirname, '../dist')));
   // serve index.html on the route '/'
   app.get('/', (req, res) => {

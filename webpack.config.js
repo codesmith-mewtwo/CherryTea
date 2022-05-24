@@ -8,6 +8,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
+  
+  mode: process.env.NODE_ENV,
+  
   plugins: [new HtmlWebpackPlugin({ template: '/client/index.html' })],
   devServer: {
     port: 8080,
@@ -19,7 +22,10 @@ module.exports = {
     compress: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
-      '/api/*': 'http://localhost:3000',
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: {'^/api/': '/'}
+      },
     },
   },
   module: {
