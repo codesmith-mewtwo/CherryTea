@@ -1,0 +1,32 @@
+.charity-add-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 10%
+}
+
+.charities-main-container {
+  width: 1000px;
+}
+
+.charities-header {
+  text-align: center;
+}
+
+.charities-side-by-side-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.charities-button-container {
+  height: 500px;
+  overflow: auto;
+}
+
+.charity-details {
+  height: 100%;
+  overflow: auto;
+}
