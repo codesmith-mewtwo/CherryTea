@@ -14,7 +14,6 @@ charityController.getCharities = async (req,res,next) => {
   console.log(res.locals.charityNames) // Array of charity names to update
 
   for await (const charity of res.locals.charityNames){
-    
     const charityName = charity.name.toLowerCase();
 
     const searchLine = charityName.replaceAll(' ', '%20')
@@ -58,7 +57,8 @@ charityController.getCharities = async (req,res,next) => {
             next(err);
           });
       } catch (error) {
-        console.log(error.response.body);
+        console.log(error);
+        next(error)
         //=> 'Internal server error ...'
       }
   };

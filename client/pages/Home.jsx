@@ -8,7 +8,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Card, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
-
 import dummyData from '../../dummyData'
 
 import Charity from '../components/Charity';
@@ -24,33 +23,34 @@ function Home() {
   const [ containerWidthLeft, setContainerWidthLeft ] = useState(12);
   const [ containerWidthRight, setContainerWidthRight ] = useState(0);
   const [ charityButtonClicked, setCharityButtonClicked] = useState(false);
-  const [ downloadedData, setDownloadedData ] = useState([])
+  const [ charityInputText, setCharityInputText ] = useState(false);
   const charityRef = useRef({})
   charityRef.current = charityButtonClicked;
   const selectedRef = useRef({})
   selectedRef.current = selected;
 
   useEffect(() => {
-    // fetch('/api/profile', {
-    //   method: "GET",
-    // })
-    // .then((res) => res.json())
-    // .then((res) => {
-    //   setDownloadedData(res)
-      // const charityDataObj = {};
-      // res.map((el, ind) => {
-      //   charityDataObj[el.name] = {...el};
-      //   charityContainer.push(
-      //     <Charity key={el.name} name={el.name} handleCharityClick={handleCharityClick} />
-      //     )
-      //   })
-      //   setCharitiesData(charityDataObj)
+    fetch('/api/profile', {
+      method: "GET",
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      const charityDataObj = {};
+      res.map((el, ind) => {
+        charityDataObj[el.name] = {...el};
+        console.log(el);
+        charityContainer.push(
+          <Charity key={el.name} name={el.name} handleCharityClick={handleCharityClick} advisory={el.advisory}/>
+          )
+        })
+      setCharitiesData(charityDataObj)
+    })
     // })
   }, [])
 
   useEffect(() => {
-    console.log(downloadedData);
-  }, [downloadedData])
+    console.log(charitiesData);
+  }, [charitiesData])
 
   useEffect(() => {
     if (selected) {
@@ -63,16 +63,16 @@ function Home() {
   }, [selected])
 
   const handleAddCharity = () => {
-    fetch('/api/profile/', {
+    console.log('\n\n\n CHARITY INPUT TEXT', charityInputText)
+    fetch('/api/profile', {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        
+        "charityName": charityInputText
       })
     })
     .then(res => {console.log(res.status)})
     .catch(err => {console.log(err)})
-  
   }
 
   const handleCharityClick = (e) => {
@@ -104,8 +104,11 @@ function Home() {
           label="Charity Name" 
           variant="outlined"
           fullWidth
+          onChange={(e) => {
+            setCharityInputText(e.target.value)
+          }}
         />
-        <Button variant="text" onClick={handleAddCharity}>Add</Button>
+        <Button href='/home' variant="text" onClick={handleAddCharity}>Add</Button>
       </div>
         <Card>
           <h2 className={"charities-header"}>

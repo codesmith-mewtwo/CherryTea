@@ -8,18 +8,21 @@ export default function Detail({charity}) {
           <h1>{charity.name}</h1>
           <Typography variant="subtitle1"> 
           {charity.purpose}
-          </Typography>
-          <br/><br/>
+          <br/>
+          {charity.advisory ? (<p>Please note: Advisory in effect for this charity. Please check your donation level and recent news. Severity Level: {charity.advisory}</p>):''}
+          <br/>
+          <br/>
           Ratings: 
-          Overall Rating: {charity.overallRating}/10
+          Overall Rating: {charity.overallRating ? `${charity.overallRating}%` : 'Not Provided'}
           <br/>
-          Financial Rating: {charity.financialRating}/10
+          Financial Rating: {charity.financialRating ? `${charity.financialRating}%` : 'Not Provided'}
           <br/>
-          Accountability: {charity.accountability}/10
+          Accountability: {charity.accountability ? `${charity.accountability}%` : 'Not Provided'}
           <br/><br/>
           <a href={charity.website}>Website</a>
           <br/><br/>
-          <a href={charity.CNLink}>More Info</a>
+          <a href={charity.CNLink}>More Info on Charity Navigator</a>
+          </Typography>
       {/* </Typography> */}
       
       {/* Trends */}
