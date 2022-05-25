@@ -8,7 +8,7 @@ router.get('/', profileController.getProfile, charityController.getCharities, (r
   return res.status(200).send(res.locals.profile);
 });
 
-router.post('/', profileController.addCharity, (req, res) => {
+router.post('/', profileController.getProfile, charityController.getCharities, profileController.addCharity, profileController.getProfile, charityController.getCharities, (req, res) => {
   return res.status(200).send(res.locals.profile);
 });
 
