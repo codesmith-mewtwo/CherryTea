@@ -7,16 +7,18 @@ const PORT = 3000
 const cookieParser = require('cookie-parser');
 
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 // Required routers
 const authRouter = require('./routers/authRouter');
+const profileRouter = require('./routers/profileRouter');
 
 // Route handlers
 app.use('/auth', authRouter);
+app.use('/profile', profileRouter);
+
 
 // Check if running in production, use build if so
 if (process.env.NODE_ENV === "production"){
