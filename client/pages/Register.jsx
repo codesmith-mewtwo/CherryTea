@@ -57,10 +57,10 @@ const Register = () => {
           </CardContent>
           <CardActions className="reg-buttons">
             <Stack>
-              <Button href="/" variant="outlined" size="large" color="primary" onClick={handleSignupClick}>
+              <Button href="/home" variant="outlined" size="large" color="primary" onClick={handleSignupClick}>
                 Sign up
               </Button>
-              <Button href="/login" size="small">
+              <Button href="/" size="small">
                 Already have an account?
               </Button>
             </Stack>

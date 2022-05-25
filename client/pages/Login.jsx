@@ -45,7 +45,7 @@ const Login = () => {
           </CardContent>
           <CardActions className="reg-buttons">
             <Stack>
-              <Button href="/" variant="outlined" size="large" color="primary" onClick={handleLoginClick}>
+              <Button href="/home" variant="outlined" size="large" color="primary" onClick={handleLoginClick}>
                 Login
               </Button>
               <Button href="/register" size="small">

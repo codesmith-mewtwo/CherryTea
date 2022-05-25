@@ -24,28 +24,33 @@ function Home() {
   const [ containerWidthLeft, setContainerWidthLeft ] = useState(12);
   const [ containerWidthRight, setContainerWidthRight ] = useState(0);
   const [ charityButtonClicked, setCharityButtonClicked] = useState(false);
+  const [ downloadedData, setDownloadedData ] = useState([])
   const charityRef = useRef({})
   charityRef.current = charityButtonClicked;
   const selectedRef = useRef({})
   selectedRef.current = selected;
 
-  useEffect( () => {
-    // console.log(dummyData);
-    fetch('/api/profile', {
-    })
-    .then((res) => res.json() )
-    .then((res) => {
-      console.log('Response data: ', res)
-      const charityDataObj = {};
-      dummyData.map((el, ind) => {
-        charityDataObj[el.name] = {...el};
-        charityContainer.push(
-          <Charity key={el.name} name={el.name} handleCharityClick={handleCharityClick} />
-        )
-      })
-      setCharitiesData(charityDataObj)
-    })
+  useEffect(() => {
+    // fetch('/api/profile', {
+    //   method: "GET",
+    // })
+    // .then((res) => res.json())
+    // .then((res) => {
+    //   setDownloadedData(res)
+      // const charityDataObj = {};
+      // res.map((el, ind) => {
+      //   charityDataObj[el.name] = {...el};
+      //   charityContainer.push(
+      //     <Charity key={el.name} name={el.name} handleCharityClick={handleCharityClick} />
+      //     )
+      //   })
+      //   setCharitiesData(charityDataObj)
+    // })
   }, [])
+
+  useEffect(() => {
+    console.log(downloadedData);
+  }, [downloadedData])
 
   useEffect(() => {
     if (selected) {
@@ -83,8 +88,11 @@ function Home() {
 
   useEffect(() => {
     console.log(selected)
+    
     console.log(charitiesData[selected])
   }, [selected]);
+
+
 
   return (
 
