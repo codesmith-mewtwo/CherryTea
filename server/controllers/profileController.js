@@ -22,10 +22,12 @@ profileController.getProfile = (req, res, next)=>{
 
 profileController.addCharity = (req, res, next)=>{
   const {uuid} = req.cookies;
-  const {charityName} = req.body;
+  let {charityName} = req.body;
+  charityName = charityName.toLowerCase();
   const query = `
   INSERT INTO users_charities (user_id, charity_id)
-  VALUES ('${uuid}', (SELECT _id FROM charities WHERE name = '${charityName}'))
+  SELECT '${uuid}', (SELECT _id FROM charities WHERE name = '${charityName}')
+  WHERE NOT EXISTS (SELECT * from users_charities WHERE user_id = '${uuid}' AND charity_id = (SELECT _id FROM charities WHERE name = '${charityName}'))
   ;`
   db.query(query)
   .then(data => {
