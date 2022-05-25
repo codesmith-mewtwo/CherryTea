@@ -1,9 +1,9 @@
 const db = require('../models/dbModel');
 const profileController = {};
 
+// getProfile middelware - takes user's UUID and returns an array of charities this user is subscribed
+// to by name. Places this array on res.locals for use in next middleware
 profileController.getProfile = (req, res, next)=>{
-
-  // Get profile will store an array of charity names on res.locals, for use in the next middleware
   const {uuid} = req.cookies;
   const query = `
   SELECT name FROM charities
@@ -20,6 +20,8 @@ profileController.getProfile = (req, res, next)=>{
   });
 }
 
+// addCharity middleware - takes UUID and charityname from request and joins 
+// user with charity in database 
 profileController.addCharity = (req, res, next)=>{
   const {uuid} = req.cookies;
   let {charityName} = req.body;
@@ -38,6 +40,11 @@ profileController.addCharity = (req, res, next)=>{
   });
 }
 
+// removeCharity middleware - takes UUID and charityname from request and unjoins 
+// user with charity in database
+// TODO: this doesn't remove the charity from the database, just unlinks the user
+// from it. Storage space isn't free so we should probably add middleware to remove
+// the charity itself too
 profileController.removeCharity = (req, res, next)=>{
   const {uuid} = req.cookies;
   const {charityName} = req.body;
