@@ -5,79 +5,86 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Card } from '@mui/material';
+import { Card, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import Grid from '@mui/material/Grid';
+
 
 import dummyData from '../../dummyData'
 
 import Charity from '../components/Charity';
+import Detail from '../components/Detail'
 
 const charityContainer = [
 ];
 const cur = false;
 
 function Home() {
-  const charityButtonHeight = '50px';
   const [ charitiesData, setCharitiesData ] = useState({});
-  const [ selected, setSelected ] = useState('');
+  const [ selected, setSelected ] = useState();
   const [ containerWidthLeft, setContainerWidthLeft ] = useState(12);
   const [ containerWidthRight, setContainerWidthRight ] = useState(0);
   const [ charityButtonClicked, setCharityButtonClicked] = useState(false);
   const charityRef = useRef({})
   charityRef.current = charityButtonClicked;
+  const selectedRef = useRef({})
+  selectedRef.current = selected;
 
-  {/* 
-    POST for new charity requires charityName in body
-  */}
-
-  
   useEffect( () => {
-    // fetch('/api/profile', {
-    {/* }) EIN / name
-      // .then((res) => res.json() )
-      // .then((res) => {
-        if (!Array.isArray(res)) setCharities([]);
-        if (res) {
-        }
-        // })
-      */}
-    console.log(dummyData);
-    const charityDataObj = {};
-    dummyData.map((el, ind) => {
-      charityDataObj[el.name] = {...el};
-      charityContainer.push(
-      <Card key={el.name} style={{ textAlign: "center"}}>
-        <Button
-          onClick={handleCharityClick}
-          size="small" 
-          style={{ height: charityButtonHeight }}
-          fullWidth 
-        >
-        {el.name}
-        </Button>
-      </Card>
-    )
+    // console.log(dummyData);
+    fetch('/api/profile', {
     })
-    setCharitiesData(charityDataObj)
+    .then((res) => res.json() )
+    .then((res) => {
+      console.log('Response data: ', res)
+      const charityDataObj = {};
+      dummyData.map((el, ind) => {
+        charityDataObj[el.name] = {...el};
+        charityContainer.push(
+          <Charity key={el.name} name={el.name} handleCharityClick={handleCharityClick} />
+        )
+      })
+      setCharitiesData(charityDataObj)
+    })
   }, [])
 
   useEffect(() => {
-    if (charityButtonClicked) {
+    if (selected) {
       setContainerWidthLeft(6)
       setContainerWidthRight(6)
     } else {
       setContainerWidthLeft(12)
       setContainerWidthRight(0)
   }
-  }, [charityRef.current])
+  }, [selected])
+
+  const handleAddCharity = () => {
+    fetch('/api/profile/', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        
+      })
+    })
+    .then(res => {console.log(res.status)})
+    .catch(err => {console.log(err)})
+  
+  }
 
   const handleCharityClick = (e) => {
-    console.log(e.target.innerText);
-    console.log(e.target.innerHTML.split('<')[0]);
-    // console.log(e.target.props.children.props.name)
-    
-    setCharityButtonClicked(!charityRef.current);
+    // This line below isolates for target charity's name
+    const charityName = e.target.innerHTML.split('<')[0];
+    console.log(e.target)
+    if (charityName === selectedRef.current) {
+      setSelected(undefined)
+    } else {
+      setSelected(charityName)
+    }
   }
+
+  useEffect(() => {
+    console.log(selected)
+    console.log(charitiesData[selected])
+  }, [selected]);
 
   return (
 
@@ -90,13 +97,13 @@ function Home() {
           variant="outlined"
           fullWidth
         />
-        <Button variant="text">Add</Button>
+        <Button variant="text" onClick={handleAddCharity}>Add</Button>
       </div>
         <Card>
           <h2 className={"charities-header"}>
-            {/* <Typography > */}
+            <Typography>
               Your Charities
-            {/* </Typography> */}
+            </Typography>
           </h2>
           <Grid container>
             <Grid item xs={8} md={containerWidthLeft} >
@@ -106,14 +113,15 @@ function Home() {
                 </div>
               </Stack>
             </Grid>
-            <Grid item xs={8} md={containerWidthRight}>
-              <Card sx={{margin: "10px", height: "96%"}}>
-                
-                <div className={"charity-details"}>
-                Hello
-                </div>
-              </Card>
-            </Grid>
+            {(
+            selected ? (
+              <Grid item xs={8} md={containerWidthRight}>
+                <Card sx={{margin: "10px", height: "96%"}}>
+                  <Detail charity={charitiesData[selected]}/>
+                </Card>
+              </Grid>
+            ) : <div></div>
+            )}
           </Grid>
         </Card>
     </Container>

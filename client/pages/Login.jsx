@@ -11,10 +11,19 @@ import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const Login = () => {
-  const [counter, setCounter] = useState(0);
+  const [ username, setUsername ] = useState('');
+  const [ password, setPassword ] = useState('');
 
-  const handleClick = () => {
-    setCounter(counter + 1);
+  const handleLoginClick = () => {
+    fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        username, password
+      })
+    })
+    .then(res => {console.log(res.status)})
+    .catch(err => {console.log(err)})
   };
 
   return (
@@ -29,14 +38,14 @@ const Login = () => {
             <br />
             <form noValidate autoComplete="off">
               <Stack spacing={3}>
-                <TextField id="outlined-username" label="Username" variant="outlined" />
-                <TextField type="password" id="outlined-password" label="Password" variant="outlined" />
+                <TextField id="outlined-username" label="Username" variant="outlined" onChange={(e) => setUsername(e.target.value)} />
+                <TextField type="password" id="outlined-password" label="Password" variant="outlined" onChange={(e) => setPassword(e.target.value)} />
               </Stack>
             </form>
           </CardContent>
           <CardActions className="reg-buttons">
             <Stack>
-              <Button variant="outlined" size="large" color="primary">
+              <Button href="/" variant="outlined" size="large" color="primary" onClick={handleLoginClick}>
                 Login
               </Button>
               <Button href="/register" size="small">
