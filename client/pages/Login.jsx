@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const Login = () => {
   const [counter, setCounter] = useState(0);
@@ -18,6 +19,7 @@ const Login = () => {
 
   return (
     <div className="root-container">
+      <CssBaseline />
       <Card>
         <Stack spacing={3}>
           <CardContent>
