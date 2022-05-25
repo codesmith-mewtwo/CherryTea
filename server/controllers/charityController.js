@@ -21,7 +21,7 @@ charityController.getCharities = async (req,res,next) => {
     // Structure API request appropriately
     const searchLine = charityName.replaceAll(' ', '%20')
       try {
-          const response = await got(`https://api.data.charitynavigator.org/v2/Organizations?app_id=daae8b79&app_key=7638e36419c57be84cfd662e3d089c0e&pageSize=1&search=${searchLine}&searchType=NAME_ONLY`).json();
+          const response = await got(`https://api.data.charitynavigator.org/v2/Organizations?app_id=1d3a9694&app_key=9241406a8d1f97afda5215cee53b5082&pageSize=1&search=${searchLine}&searchType=NAME_ONLY`).json();
           let {
             tagLine,
             charityName,

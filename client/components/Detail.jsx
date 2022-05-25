@@ -9,10 +9,12 @@ export default function Detail({charity}) {
           <Typography variant="subtitle1"> 
           {charity.purpose}
           <br/>
-          {charity.advisory ? (<p>Please note: Advisory in effect for this charity. Please check your donation level and recent news. Severity Level: {charity.advisory}</p>):''}
+          {charity.advisory ? (<p className="warning">Please note: Advisory in effect for this charity. Please check your donation level and recent news.</p>):''}
+          {charity.advisory ? (<p>Severity Level: {charity.advisory}</p>):''}
           <br/>
           <br/>
           Ratings: 
+          <br/>
           Overall Rating: {charity.overallRating ? `${charity.overallRating}%` : 'Not Provided'}
           <br/>
           Financial Rating: {charity.financialRating ? `${charity.financialRating}%` : 'Not Provided'}

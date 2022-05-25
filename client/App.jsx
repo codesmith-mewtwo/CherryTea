@@ -10,8 +10,9 @@ const App = () => {
   return (
     <Router>
       <>
-        <h1>Cherry Tea</h1>
-        {/* <Navbar /> */}
+        {/* <span><h1>Cherry Tea</h1></span>
+        <span><i class="fa-solid fa-seedling"></i></span> */}
+        <Navbar />
         {/* <ul>
           <li>
             <Link to="/home">Home</Link>

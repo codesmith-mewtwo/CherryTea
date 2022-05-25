@@ -6,6 +6,17 @@
   margin-bottom: 5%;
 }
 
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  margin-right: 10px;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+i {
+  font-size: 30px;
+}
+
 .charities-main-container {
   width: 1000px;
 }
@@ -30,4 +41,8 @@
 .charity-details {
   height: 100%;
   overflow: auto;
+}
+
+.warning {
+  color: red;
 }

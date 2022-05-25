@@ -26,24 +26,29 @@ function Navbar() {
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
-          <Link to='/' className='navbar-logo'>
+          <h2 >
             CherryTea
+           </h2>
             <i class="fa-solid fa-seedling"></i>         
-           </Link>
           <ul className='nav-menu'>
             <li className='nav-item'>
-              <Link to='/' className='nav-links'>
-                Home
+              <Link to='/home' className='nav-links'>
+              <Button variant="contained" size="large">Home</Button>
+
               </Link>
             </li>
            
             <li className='nav-item'>
-              <Link to='/login' className='nav-links'>
-                <Button>Login</Button>
+              <Link to='/' className='nav-links'>
+                <Button variant="contained" size="large">Login</Button>
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link to='/register' className='nav-links'>
+                 <Button variant="contained" size="large">SIGN UP</Button>
               </Link>
             </li>
           </ul>
-        <Button >SIGN UP</Button>
         </div>
       </nav>
     </>
