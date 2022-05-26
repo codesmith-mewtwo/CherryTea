@@ -8,9 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
-  
-  mode: process.env.NODE_ENV,
-  
   plugins: [new HtmlWebpackPlugin({ template: '/client/index.html' })],
   devServer: {
     port: 8080,

@@ -37,7 +37,9 @@ authController.logIn = ((req, res, next)=>{
   ;`
   db.query(query, user)
   .then(data => {
+    console.log(data)
     res.locals.UUID = data.rows[0]._id
+    console.log(res.locals.UUID)
     if (data.rowCount === 0){next(`username or password incorrect`)}
     next();
   })

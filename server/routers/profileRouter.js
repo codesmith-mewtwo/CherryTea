@@ -31,6 +31,7 @@ router.post('/', profileController.getProfile, charityController.getCharities, p
 // and returns updated charities.
 // TODO: see note in above todo - this middleware chain is also not optimum. Future dev 
 // recommendation: caching :D
+// TODO: connect this to the front end, currently no front end method to delete charity
 router.delete('/', profileController.removeCharity, profileController.getProfile, charityController.getCharities, (req, res) => {
   return res.status(200).send(res.locals.profile);
 });

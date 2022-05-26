@@ -7,7 +7,6 @@ const cookieController = {};
 // and place it on a cookie for future use 
 
 cookieController.setUUIDCookie = (req, res, next) => {
-  // write code here
   const uuid = res.locals.UUID;
   res.cookie('uuid', uuid, {httpOnly: true})
   next();

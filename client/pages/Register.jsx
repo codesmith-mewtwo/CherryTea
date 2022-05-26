@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,11 +11,28 @@ import Stack from '@mui/material/Stack';
 import CssBaseline from '@mui/material/CssBaseline';
 
 const Register = () => {
-  const [counter, setCounter] = useState(0);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleClick = () => {
-    setCounter(counter + 1);
-  };
+  const handleSignupClick = () => {
+    fetch('/api/auth/signup', {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+    .then((res) => res.json() )
+    .then((res) => {
+      console.log(res)
+    })
+  }
+
+  useEffect(() => {
+    console.log(username)
+    console.log(password)
+  }, [username, password])
 
   return (
     <div className="root-container">
@@ -29,17 +46,21 @@ const Register = () => {
             <br />
             <form noValidate autoComplete="off">
               <Stack spacing={3}>
-                <TextField id="outlined-username" label="Username" variant="outlined" />
-                <TextField type="password" id="outlined-password" label="Password" variant="outlined" />
+                <TextField id="outlined-username" label="Username" variant="outlined" onChange={(e) => {
+                  setUsername(e.target.value)
+                }} />
+                <TextField type="password" id="outlined-password" label="Password" variant="outlined" onChange={(e) => {
+                  setPassword(e.target.value)
+                }} />
               </Stack>
             </form>
           </CardContent>
           <CardActions className="reg-buttons">
             <Stack>
-              <Button variant="outlined" size="large" color="primary">
+              <Button href="/home" variant="outlined" size="large" color="primary" onClick={handleSignupClick}>
                 Sign up
               </Button>
-              <Button href="/login" size="small">
+              <Button href="/" size="small">
                 Already have an account?
               </Button>
             </Stack>

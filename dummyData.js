@@ -7,10 +7,13 @@ const dummyData = [
     "financialRating" : "2",
     "overallRating" : "3",
     "accountability" : "4",
-    "missionStatement" : "5",
-    "contactInfo": "6",
-    "website": "7",
-    "CNLink": "8",
+    "missionStatement" : "asdfasdf",
+    "contactInfo": "aaaaaaaaa",
+    "website": "bbbbbbbbbbb",
+    "CNLink": "cccccccccc",
+    "advisories": {
+      "severity": null
+    },
     "financialTrend": false,
     "overallTrend": null,
     "accountabilityTrend": true
@@ -27,6 +30,9 @@ const dummyData = [
     "contactInfo": "6",
     "website": "7",
     "CNLink": "8",
+    "advisories": {
+      "severity": "low"
+    },
     "financialTrend": false,
     "overallTrend": null,
     "accountabilityTrend": true

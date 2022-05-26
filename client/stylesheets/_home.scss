@@ -3,7 +3,18 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-bottom: 10%
+  margin-bottom: 5%;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  margin-right: 10px;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+i {
+  font-size: 30px;
 }
 
 .charities-main-container {
@@ -24,9 +35,14 @@
 .charities-button-container {
   height: 500px;
   overflow: auto;
+  padding: 20px;
 }
 
 .charity-details {
   height: 100%;
   overflow: auto;
+}
+
+.warning {
+  color: red;
 }
